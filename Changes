@@ -1,5 +1,9 @@
 Revision history for WWW-PastebinCom-Retrieve
 
-0.01    Date/time
+0.002   March 5, 2008
+        fixed the bug when passing full URI to the paste was
+            giving 400 errors.
+
+0.001    February
         First version, released on an unsuspecting world.
 

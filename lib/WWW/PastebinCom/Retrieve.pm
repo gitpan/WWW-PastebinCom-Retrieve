@@ -3,7 +3,7 @@ package WWW::PastebinCom::Retrieve;
 use warnings;
 use strict;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 use Carp;
 use URI;
@@ -34,7 +34,7 @@ sub retrieve {
     $self->content( undef );
     $self->paste_number( undef );
 
-    $what =~ s{(?: http:// )? (www\.)? pastebin\.com /}{}i;
+    $what =~ s{(?: http:// )? (www\.)? pastebin\.com /}{}ix;
     unless ( defined $what and length $what ) {
         $self->error('Could not make out a paste number or URI');
         return;

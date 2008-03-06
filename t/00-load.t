@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 11;
+use Test::More tests => 12;
 
 my $Test_paste_number = 'f3fdae56d';
 
@@ -24,10 +24,11 @@ can_ok($paster, qw(new retrieve error paste_number content));
 
 diag("Testing on paste number $Test_paste_number");
 my $paste_content = $paster->retrieve( $Test_paste_number );
+
 SKIP: {
     unless ( defined $paste_content ) {
         ok(defined $paster->error, "Error occured, error() must be defined");
-        skip "Got retrieve error: " . $paster->error, 4;
+        skip "Got retrieve error: " . $paster->error, 5;
     }
     is(
         $paste_content,
@@ -60,6 +61,13 @@ SKIP: {
         exists $content_test->{time},
         "keys of evaled paste hashref (key 'time')"
     );
+
+    my $paste2 = $paster->retrieve( "http://pastebin.com/$Test_paste_number" );
+    is( $paste2,
+        $paste_content,
+        'getting the paste with full URI must produce same results'
+    );
+    
 }
 
 
